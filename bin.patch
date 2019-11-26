@@ -1,0 +1,13 @@
+diff --git a/src/php-webserver-gui.c b/src/php-webserver-gui.c
+index 2c1e97f..30136d9 100644
+--- a/src/php-webserver-gui.c
++++ b/src/php-webserver-gui.c
+@@ -337,7 +337,7 @@ main (int argc, char *argv[])
+ 	gtk_file_chooser_add_filter (signalArgs.phpButton, php_filters);
+ 
+ 	/* Set "PHP" button to reasonable default location */
+-	gtk_file_chooser_select_filename (signalArgs.phpButton, "/usr/bin/php");
++	gtk_file_chooser_select_filename (signalArgs.phpButton, "/app/php/bin/php");
+ 
+ 	/* Get address entry box */
+ 	signalArgs.addressEntry = GTK_ENTRY (get_object (builder, "address_entry"));

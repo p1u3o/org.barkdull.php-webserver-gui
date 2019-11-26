@@ -1,0 +1,69 @@
+{
+  "app-id":"org.barkdull.php-webserver-gui",
+  "runtime":"org.gnome.Platform",
+  "runtime-version":"3.34",
+  "rename-desktop-file": "php-webserver-gui.desktop",
+  "rename-icon": "php-webserver-gui",
+  "sdk":"org.gnome.Sdk",
+  "command":"php-webserver-gui",
+  "finish-args":[
+    "--share=ipc",
+    "--share=network",
+    "--filesystem=host",
+    "--filesystem=home",
+    "--socket=fallback-x11",
+    "--socket=wayland",
+    "--socket=pulseaudio",
+    "--env=PATH=/app/php/bin:/app/bin:/usr/bin"
+  ],
+  "cleanup":[
+    "/include",
+    "/share/gir-1.0",
+    "/lib/pkgconfig",
+    "/lib/girepository-1.0",
+    "/share/vala-0.34",
+    "/bin/vala*",
+    "/bin/vapi*",
+    "/share/devhelp",
+    "/share/aclocal",
+    "/lib/*.la",
+    "/lib/libvala*",
+    "/lib/vala-0.34",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/vala"
+  ],
+  "add-extensions": {
+    "org.freedesktop.Sdk.Extension.php73": {
+      "directory": "php",
+      "version": "19.08",
+      "add-ld-path": "lib"
+    }
+  },
+  "modules":[
+    {
+      "name":"php-webserver-gui",
+      "buildsystem":"autotools",
+      "no-autogen": true,
+      "build-commands": [
+        "mkdir -p /app/share/icons/hicolor/scalable/apps",
+        "mkdir -p /app/share/applications",
+        "mkdir -p /app/bin",
+        "mkdir -p /app/php",
+        "sed -i -e 's,/usr/local/bin,/app/bin,g' Makefile",
+        "sed -i -e 's,/usr/share/applications,/app/share/applications,g' Makefile",
+        "sed -i -e 's,/usr/share/pixmaps,/app/share/icons/hicolor/scalable/apps,g' Makefile"
+      ],
+      "sources":[
+        {
+          "type":"git",
+          "url":"https://github.com/jacobwb/php-webserver-gui.git"
+        },
+        {
+          "type":"patch",
+          "path":"bin.patch"
+        }
+      ]
+    }
+  ]
+}
